@@ -184,6 +184,11 @@ PromZard.prototype.walk = function (o, cb) {
         if (undefined === prompt[1])
           prompt[1] = this.ctx[k]
 
+        // make sure that array fields are treated correctly
+        if (Array.isArray(prompt[1])) {
+          prompt[1] = prompt[1].join(',');
+        }
+
         return this.prompt(prompt, function (er, res) {
           if (er) {
             if (!er.notValid) {
